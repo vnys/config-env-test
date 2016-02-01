@@ -31,7 +31,7 @@ In config.js, the default port is 9999 and the default value of "foo" is "bar". 
 }
 ```
 
-**override files**
+**override-files**
 
 The environment variables can also be overridden using the development.json, production.json and local.json files. Switch between these during start-up, i.e. `node server.js --env=production`
 
