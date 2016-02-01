@@ -1,14 +1,17 @@
 'use strict';
 
 const convict = require('convict'),
-pckage = require('./package.json');
+    path = require('path'),
+    fs = require('fs'),
+    pckage = require('./package.json');
 
 let conf = convict({
     env: {
         doc: "Applicaton environments",
         format  : ["development", "production"],
         default : "development",
-        env     : "NODE_ENV"
+        env     : "NODE_ENV",
+        arg     : "env"
     },
 
     version: {
@@ -38,6 +41,15 @@ let conf = convict({
         env: "FOO"
     }
 });
+
+
+// Load and validate configuration depending on environment
+
+if (fs.existsSync(path.resolve(__dirname, './local.json'))) {
+    conf.loadFile([path.resolve(__dirname, './', conf.get('env') + '.json'), path.resolve(__dirname, '../config/local.json')]);
+} else {
+    conf.loadFile([path.resolve(__dirname, './', conf.get('env') + '.json')]);
+}
 
 conf.validate();
 
