@@ -31,3 +31,8 @@ In config.js, the default port is 9999 and the default value of "foo" is "bar". 
 }
 ```
 
+**fish**
+
+To modify env-variables directly using [fish](https://fishshell.com/), start with **env**, i.e.: 
+`env FOO=barbaz node server.js`
+
